@@ -5,14 +5,33 @@
   "dependencies": {
     "@material-ui/core": "^3.0.2",
     "@material-ui/icons": "^3.0.1",
+    "chartist": "^0.11.0",
     "expo": "^25.0.0",
+    "history": "^4.7.2",
+    "perfect-scrollbar": "^1.4.0",
     "react": "^16.4.2",
     "react-art": "^16.4.2",
+    "react-big-calendar": "^0.19.2",
+    "react-bootstrap-sweetalert": "^4.4.1",
+    "react-chartist": "^0.13.1",
+    "react-datetime": "^2.15.0",
     "react-dom": "^16.4.2",
-    "react-native": "^0.52.0",
+    "react-facebook-pixel": "^0.1.1",
+    "react-ga": "^2.5.3",
+    "react-github-button": "^0.1.11",
+    "react-google-maps": "^9.4.5",
+    "react-jvectormap": "0.0.3",
+    "react-native": "^0.56.0",
     "react-native-web": "^0.8.9",
     "react-navigation": "^2.12.1",
-    "react-scripts": "1.1.5"
+    "react-nouislider": "^2.0.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.5",
+    "react-share": "^2.3.1",
+    "react-swipeable-views": "^0.12.17",
+    "react-syntax-highlighter": "^8.0.1",
+    "react-table": "^6.8.6",
+    "react-tagsinput": "^3.19.0"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
@@ -36,7 +55,7 @@
     "babel-preset-expo": "^4.0.0",
     "flow-bin": "^0.80.0",
     "jest-expo": "^29.0.0",
-    "react-native-scripts": "^1.14.0",
+    "react-native-scripts": "^1.14.1",
     "react-test-renderer": "^16.2.0"
   }
 }
