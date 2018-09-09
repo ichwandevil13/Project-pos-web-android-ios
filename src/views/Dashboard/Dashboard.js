@@ -12,7 +12,7 @@ import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
 // import ContentCopy from "@material-ui/icons/ContentCopy";
-import Store from "@material-ui/icons/Store";
+import { Store, AccessAlarm, ThreeDRotation} from "@material-ui/icons";
 // import InfoOutline from "@material-ui/icons/InfoOutline";
 import Warning from "@material-ui/icons/Warning";
 import DateRange from "@material-ui/icons/DateRange";
@@ -50,12 +50,12 @@ import priceImage1 from "../../assets/img/card-2.jpeg";
 import priceImage2 from "../../assets/img/card-3.jpeg";
 import priceImage3 from "../../assets/img/card-1.jpeg";
 
-const us_flag = require("../../assets/img/flags/US.png");
-const de_flag = require("../../assets/img/flags/DE.png");
-const au_flag = require("../../assets/img/flags/AU.png");
-const gb_flag = require("../../assets/img/flags/GB.png");
-const ro_flag = require("../../assets/img/flags/RO.png");
-const br_flag = require("../../assets/img/flags/BR.png");
+const us_flag = require("../../assets/img/flags/united-states-of-america.png");
+const de_flag = require("../../assets/img/flags/andorra.png");
+const au_flag = require("../../assets/img/flags/australia.png");
+const gb_flag = require("../../assets/img/flags/afghanistan.png");
+const ro_flag = require("../../assets/img/flags/aruba.png");
+const br_flag = require("../../assets/img/flags/brazil.png");
 
 var mapData = {
   AU: 760,
@@ -113,7 +113,7 @@ class Dashboard extends React.Component {
             <Card>
               <CardHeader color="success" stats icon>
                 <CardIcon color="success">
-                  <Store />
+                  <ThreeDRotation />
                 </CardIcon>
                 <p className={classes.cardCategory}>Revenue</p>
                 <h3 className={classes.cardTitle}>$34,245</h3>
@@ -130,7 +130,7 @@ class Dashboard extends React.Component {
             <Card>
               <CardHeader color="danger" stats icon>
                 <CardIcon color="danger">
-                  <Icon>info_outline</Icon>
+                  <Store />
                 </CardIcon>
                 <p className={classes.cardCategory}>Fixed Issues</p>
                 <h3 className={classes.cardTitle}>75</h3>
@@ -147,7 +147,7 @@ class Dashboard extends React.Component {
             <Card>
               <CardHeader color="info" stats icon>
                 <CardIcon color="info">
-                  <i className="fab fa-twitter" />
+                  <AccessAlarm />
                 </CardIcon>
                 <p className={classes.cardCategory}>Followers</p>
                 <h3 className={classes.cardTitle}>+245</h3>
@@ -178,37 +178,31 @@ class Dashboard extends React.Component {
                     <Table
                       tableData={[
                         [
-                          <img src={us_flag} alt="us_flag" />,
                           "USA",
                           "2.920",
                           "53.23%"
                         ],
                         [
-                          <img src={de_flag} alt="us_flag" />,
                           "Germany",
                           "1.300",
                           "20.43%"
                         ],
                         [
-                          <img src={au_flag} alt="us_flag" />,
                           "Australia",
                           "760",
                           "10.35%"
                         ],
                         [
-                          <img src={gb_flag} alt="us_flag" />,
                           "United Kingdom",
                           "690",
                           "7.87%"
                         ],
                         [
-                          <img src={ro_flag} alt="us_flag" />,
                           "Romania",
                           "600",
                           "5.94%"
                         ],
                         [
-                          <img src={br_flag} alt="us_flag" />,
                           "Brasil",
                           "550",
                           "4.34%"

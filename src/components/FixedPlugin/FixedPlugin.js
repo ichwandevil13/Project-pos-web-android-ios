@@ -8,6 +8,7 @@ import {
 } from "react-share";
 import GitHubButton from "react-github-button";
 
+import { Settings } from "@material-ui/icons";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Switch from "@material-ui/core/Switch";
 
