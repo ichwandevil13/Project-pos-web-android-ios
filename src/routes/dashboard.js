@@ -23,6 +23,9 @@ import UserProfile from "../views/Pages/UserProfile";
 import TimelinePage from "../views/Pages/Timeline";
 import RTLSupport from "../views/Pages/RTLSupport";
 
+//Master view
+import MasterSatuans from "../views/Masters/MasterSatuans"
+
 import pagesRoutes from "./pages";
 
 // @material-ui/icons
@@ -63,6 +66,33 @@ var dashRoutes = [
     name: "Dashboard",
     icon: DashboardIcon,
     component: Dashboard
+  },
+  {
+    collapse: true,
+    path: "/Masters",
+    name: "Masters",
+    state: "openMasters",
+    icon: GridOn, 
+    views: [
+      {
+        path: "/masters/Masters-satuan",
+        name: "Satuan",
+        mini: "MS",
+        component: MasterSatuans
+      },
+      {
+        path: "/masters/Masters-rak",
+        name: "Rak",
+        mini: "MR",
+        component: ExtendedTables
+      },
+      {
+        path: "/masters/Masters-class",
+        name: "Class",
+        mini: "MC",
+        component: ReactTables
+      }
+    ]
   },
   {
     collapse: true,
