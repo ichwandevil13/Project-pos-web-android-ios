@@ -51,7 +51,7 @@ class Dashboard extends React.Component {
       color: "blue",
       bgColor: "black",
       hasImage: true,
-      fixedClasses: "dropdown show"
+      fixedClasses: "dropdown"
     };
     this.handleImageClick = this.handleImageClick.bind(this);
     this.handleColorClick = this.handleColorClick.bind(this);

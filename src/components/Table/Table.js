@@ -28,6 +28,7 @@ function CustomTable({ ...props }) {
     customHeadCellClasses,
     customHeadClassesForCells
   } = props;
+
   return (
     <div className={classes.tableResponsive}>
       <Table className={classes.table}>
@@ -121,22 +122,42 @@ function CustomTable({ ...props }) {
                 hover={hover}
                 className={classes.tableRow + " " + tableRowClasses}
               >
-                {prop.map((prop, key) => {
-                  const tableCellClasses =
-                    classes.tableCell +
-                    " " +
-                    cx({
-                      [classes[colorsColls[coloredColls.indexOf(key)]]]:
-                        coloredColls.indexOf(key) !== -1,
-                      [customCellClasses[customClassesForCells.indexOf(key)]]:
-                        customClassesForCells.indexOf(key) !== -1
-                    });
-                  return (
-                    <TableCell className={tableCellClasses} key={key}>
-                      {prop}
-                    </TableCell>
-                  );
-                })}
+                {
+                  typeof prop !== "object" ?
+                    prop.map((prop, key) => {
+                      const tableCellClasses =
+                        classes.tableCell +
+                        " " +
+                        cx({
+                          [classes[colorsColls[coloredColls.indexOf(key)]]]:
+                            coloredColls.indexOf(key) !== -1,
+                          [customCellClasses[customClassesForCells.indexOf(key)]]:
+                            customClassesForCells.indexOf(key) !== -1
+                        });
+                      return (
+                        <TableCell className={tableCellClasses} key={key}>
+                          {prop}
+                        </TableCell>
+                      );
+                    })
+                    :
+                    Object.keys(prop).map(key => {
+                      const tableCellClasses =
+                        classes.tableCell +
+                        " " +
+                        cx({
+                          [classes[colorsColls[coloredColls.indexOf(key)]]]:
+                            coloredColls.indexOf(key) !== -1,
+                          [customCellClasses[customClassesForCells.indexOf(key)]]:
+                            customClassesForCells.indexOf(key) !== -1
+                        });
+                      return (
+                        <TableCell className={tableCellClasses} key={key}>
+                          {prop[key]}
+                        </TableCell>
+                      );
+                    })
+                }
               </TableRow>
             );
           })}

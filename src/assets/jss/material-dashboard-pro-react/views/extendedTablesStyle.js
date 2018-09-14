@@ -14,6 +14,15 @@ const extendedTablesStyle = {
   description: {
     maxWidth: "150px"
   },
+  speedDial: {
+    position: "fixed",
+    top: "180px",
+    right: "16px",
+    width: "64px",
+    zIndex: "1031",
+    borderRadius: "8px 0 0 8px",
+    textAlign: "center",
+  },
   actionButton: {
     margin: "0 0 0 5px",
     padding: "5px",

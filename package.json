@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.0.2",
     "@material-ui/icons": "^3.0.1",
+    "@material-ui/lab": "^3.0.0-alpha.15",
     "chartist": "^0.11.0",
     "expo": "^25.0.0",
     "history": "^4.7.2",
