@@ -497,7 +497,7 @@ class MasterCategories extends React.Component {
                 onClick={()=>{this.handleSpeedDial(action.name)}}
               />
             ))}
-          </SpeedDial>
+          </SpeedDial> 
         </GridItem>
         {this.state.alert}
       </GridContainer>
