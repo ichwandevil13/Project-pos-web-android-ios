@@ -1,6 +1,7 @@
 import buttonGroupStyle from "../../material-dashboard-pro-react/buttonGroupStyle";
 import customCheckboxRadioSwitch from "../../material-dashboard-pro-react/customCheckboxRadioSwitch";
 import { cardTitle } from "../../material-dashboard-pro-react";
+import buttonStyle from "../../material-dashboard-pro-react/components/buttonStyle";
 
 const extendedTablesStyle = {
   ...customCheckboxRadioSwitch,
@@ -16,7 +17,7 @@ const extendedTablesStyle = {
   },
   speedDial: {
     position: "fixed",
-    top: "180px",
+    bottom: "64px",
     right: "16px",
     width: "64px",
     zIndex: "1031",
@@ -91,7 +92,23 @@ const extendedTablesStyle = {
     ...cardTitle,
     marginTop: "15px",
     marginBottom: "0px"
-  }
+  },
+  cardTitle: {
+    marginTop: "0",
+    marginBottom: "3px",
+    color: "#3C4858",
+    fontSize: "18px"
+  },
+  center: {
+    textAlign: "center"
+  },
+  right: {
+    textAlign: "right"
+  },
+  left: {
+    textAlign: "left"
+  },
+  ...buttonStyle
 };
 
 export default extendedTablesStyle;

@@ -53,19 +53,18 @@ const actions = [
   { icon: <FindInPage />, name: 'Filter' },
 ];
 
-class MasterSatuans extends React.Component {
+class MasterRaks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       checked: [],
-      headdatatables: [{ id: 'Nama_Satuan', numeric: false, disablePadding: true, label: 'Nama Satuan' },
-      { id: 'Keterangan', numeric: false, disablePadding: true,  label: 'Keterangan' },
-      { id: 'Contain', numeric: true, disablePadding: false, label: 'Contain' },],
+      headdatatables: [{ id: 'nama_Rak', numeric: false, disablePadding: true, label: 'Nama Rak' },
+      { id: 'keterangan', numeric: false, disablePadding: true,  label: 'Keterangan' }],
       useFilter: false,
       datatables: [],
       dialopen: false,
       dialhidden: false,
-      selected: [1],
+      selected: [],
       FormList: [],
       DataForm: {},
       DataValidation: {}
@@ -117,6 +116,7 @@ class MasterSatuans extends React.Component {
           )
       });
   }
+
   warningAlert(title, message) {
     this.setState({
         alert: (
@@ -138,7 +138,7 @@ class MasterSatuans extends React.Component {
   RefreshData = () => {
     this.getListDataFromApiAsync().then((response) => {
       this.setState({
-        datatables:  response.listSatuan
+        datatables:  response.listRak
       });
     })
   }
@@ -238,10 +238,10 @@ class MasterSatuans extends React.Component {
       DataValidation: {}
     });
   };
-  isSelected = idSatuan => this.state.selected.indexOf(idSatuan) !== -1;
+  isSelected = idRak => this.state.selected.indexOf(idRak) !== -1;
 
   getListDataFromApiAsync() {
-    return fetch('http://www.transnet-developer.com/api/Master/Satuan/post/FindSatuan', {
+    return fetch('http://www.transnet-developer.com/api/Master/Rak/post/FindRak', {
       method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -261,7 +261,7 @@ class MasterSatuans extends React.Component {
   }
 
   postDataFromApiAsync(data) {
-    return fetch('http://www.transnet-developer.com/api/Master/Satuan/post/AddEditSatuan', {
+    return fetch('http://www.transnet-developer.com/api/Master/Rak/post/AddEditRak', {
       method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -282,7 +282,7 @@ class MasterSatuans extends React.Component {
   }
 
   getDataFromApiAsync(id) {
-    return fetch('http://www.transnet-developer.com/api/Master/Satuan/get/GetSatuan?IDSatuan='+id, {
+    return fetch('http://www.transnet-developer.com/api/Master/Rak/get/GetRak?IDRak='+id, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -345,15 +345,15 @@ class MasterSatuans extends React.Component {
               <CardIcon color="success">
                 <Assignment />
               </CardIcon>
-              <h4 className={classes.cardIconTitle}>Form Satuan</h4>
+              <h4 className={classes.cardIconTitle}>Form Rak</h4>
             </CardHeader>
             <CardBody>
               <form>
                 <CustomInput
-                  //success={DataValidation.nama_Satuan}
-                  //error={!DataValidation.nama_Satuan}
-                  labelText="Nama Satuan *"
-                  id="__namaSatuan"
+                  //success={DataValidation.nama_Rak}
+                  //error={!DataValidation.nama_Rak}
+                  labelText="Nama Rak *"
+                  id="__namaRak"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -362,13 +362,13 @@ class MasterSatuans extends React.Component {
                       {
                         DataForm: {
                           ...this.state.DataForm,
-                          nama_Satuan: event.target.value
+                          nama_Rak: event.target.value
                         }
                     }),
-                    //onChange: event => { DataValidation.nama_Satuan = !DataValidation.nama_Satuan },
+                    //onChange: event => { DataValidation.nama_Rak = !DataValidation.nama_Rak },
                     type: "text",
-                    value: this.state.DataForm.nama_Satuan,
-                    defaultValue: data.nama_Satuan
+                    value: this.state.DataForm.nama_Rak,
+                    defaultValue: data.nama_Rak
                   }}
                 />
                 <CustomInput
@@ -387,31 +387,10 @@ class MasterSatuans extends React.Component {
                           keterangan: event.target.value
                         }
                     }),
-                    //onChange: event => { DataValidation.keterangan = !DataValidation.nama_Satuan },
+                    //onChange: event => { DataValidation.keterangan = !DataValidation.nama_Rak },
                     type: "text",
                     value: this.state.DataForm.keterangan,
                     defaultValue: data.keterangan
-                  }}
-                />
-                <CustomInput
-                  //success={DataValidation.keterangan}
-                  //error={!DataValidation.keterangan}
-                  labelText="Contain *"
-                  id="__contain"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  inputProps={{
-                    onChange: event => this.setState(
-                      {
-                        DataForm: {
-                          ...this.state.DataForm,
-                          contain: event.target.value
-                        }
-                    }),
-                    type: "number",
-                    value: this.state.DataForm.contain,
-                    defaultValue: Number(data.contain)
                   }}
                 />
                 <div className={classes.formCategory}>
@@ -460,7 +439,7 @@ class MasterSatuans extends React.Component {
               <CardIcon color="rose">
                 <Assignment />
               </CardIcon>
-              <h4 className={classes.cardIconTitle}>Satuan Table</h4>
+              <h4 className={classes.cardIconTitle}>Rak Table</h4>
             </CardHeader>
             <CardBody>
             <div className={classes.tableWrapper}>
@@ -494,22 +473,22 @@ class MasterSatuans extends React.Component {
               </TableHead>
                 <TableBody>
                   { this.state.datatables.map((n, key) => {
-                      const isSelected = this.isSelected(n.idSatuan);
+                      const isSelected = this.isSelected(n.idRak);
                       return (
                         <TableRow
                           hover
-                          onClick={event => this.handleClickRow(event, n.idSatuan)}
+                          onClick={event => this.handleClickRow(event, n.idRak)}
                           role="checkbox"
                           aria-checked={isSelected}
                           tabIndex={-1}
-                          key={n.idSatuan}
+                          key={n.idRak}
                           selected={isSelected}
                         >
                           <TableCell padding="checkbox">
                             <Checkbox checked={isSelected} />
                           </TableCell>
                           <TableCell component="th" scope="row" padding="none">
-                            {n.nama_Satuan}
+                            {n.nama_Rak}
                           </TableCell>
                           <TableCell>{n.keterangan}</TableCell>
                           <TableCell numeric>{n.contain}</TableCell>
@@ -553,7 +532,7 @@ class MasterSatuans extends React.Component {
   }
 }
 
-export default withStyles(MasterSatuansStyle)(MasterSatuans);
+export default withStyles(MasterSatuansStyle)(MasterRaks);
 
 
 
