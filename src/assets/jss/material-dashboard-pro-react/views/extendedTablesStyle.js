@@ -19,10 +19,10 @@ const extendedTablesStyle = {
     position: "fixed",
     bottom: "64px",
     right: "16px",
-    width: "64px",
+    width: "auto",
+    height: "auto",
+    minWidth: "auto",
     zIndex: "1031",
-    borderRadius: "8px 0 0 8px",
-    textAlign: "center",
   },
   actionButton: {
     margin: "0 0 0 5px",

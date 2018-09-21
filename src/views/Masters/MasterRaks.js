@@ -10,9 +10,15 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
+import TextField from '@material-ui/core/TextField';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
 import Tooltip from '@material-ui/core/Tooltip';
 
 // @material-ui/lab
@@ -24,6 +30,7 @@ import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
 import { 
   Save, 
   Print, 
+  MoreVert,
   Delete, 
   FileCopy, 
   FindInPage, 
@@ -67,10 +74,15 @@ class MasterRaks extends React.Component {
       selected: [],
       FormList: [],
       DataForm: {},
-      DataValidation: {}
+      DataValidation: {},
+      open: false
     };
     this.handleToggle = this.handleToggle.bind(this);
     this.RefreshData();
+  }
+
+  backToApp() {
+    window.scrollTo(0, 0)
   }
 
   hideAlert() {
@@ -78,6 +90,17 @@ class MasterRaks extends React.Component {
       alert: null
     });
   }
+
+  handleMenuToggle = () => {
+    this.setState(state => ({ open: !state.open }));
+  };
+
+  handleMenuClose = event => {
+    if (this.anchorEl.contains(event.target)) {
+      return;
+    }
+    this.setState({ open: false });
+  };
 
   errorAlert(title, message) {
     this.setState({
@@ -172,6 +195,10 @@ class MasterRaks extends React.Component {
     }));
   };
 
+  backToApp() {
+    window.scrollTo(0, 0)
+  }
+
   handleSpeedDial = (actionNama) => {
     if (actionNama == 'Add') {
       this.formAddData({});
@@ -181,9 +208,9 @@ class MasterRaks extends React.Component {
         let idRaw = this.state.selected[0];
         //debugger;
         this.getDataFromApiAsync(idRaw).then((response) => {
-          this.setState({
-            DataForm:  response
-          });
+          // this.setState({
+          //   DataForm:  response
+          // });
           this.formAddData(response); 
         })
       }else{
@@ -367,10 +394,12 @@ class MasterRaks extends React.Component {
                     }),
                     //onChange: event => { DataValidation.nama_Rak = !DataValidation.nama_Rak },
                     type: "text",
+                    id: 'namaRak_' + this.state.DataForm.idRak,
                     value: this.state.DataForm.nama_Rak,
                     defaultValue: data.nama_Rak
                   }}
                 />
+                
                 <CustomInput
                   //success={DataValidation.keterangan}
                   //error={!DataValidation.keterangan}
@@ -389,6 +418,7 @@ class MasterRaks extends React.Component {
                     }),
                     //onChange: event => { DataValidation.keterangan = !DataValidation.nama_Rak },
                     type: "text",
+                    id: 'keteranganRak_' + this.state.DataForm.idRak,
                     value: this.state.DataForm.keterangan,
                     defaultValue: data.keterangan
                   }}
@@ -417,12 +447,17 @@ class MasterRaks extends React.Component {
       )
     this.setState({
       FormList: [form]
+    }, () => {
+      this.backToApp();
+      this.setState({ 
+            DataForm:  data
+      });
     });
   }
 
   render() {
     const { order, orderBy, classes  } = this.props;
-    const { dialhidden, dialopen } = this.state;
+    const { open } = this.state;
     let isTouch;
     if (typeof document !== 'undefined') {
       isTouch = 'ontouchstart' in document.documentElement;
@@ -503,28 +538,41 @@ class MasterRaks extends React.Component {
           <Button color="info" round>
             <ExpandMore /> Load More
           </Button>
-          <SpeedDial
-            ariaLabel="SpeedDial example"
-            className={classes.speedDial}
-            hidden={dialhidden}
-            icon={<SpeedDialIcon />}
-            onBlur={this.handleClose}
-            onClick={this.handleClick}
-            onClose={this.handleClose}
-            onFocus={isTouch ? undefined : this.handleOpen}
-            onMouseEnter={isTouch ? undefined : this.handleOpen}
-            onMouseLeave={this.handleClose}
-            open={dialopen}
-          >
-            {actions.map(action => (
-              <SpeedDialAction
-                key={action.name}
-                icon={action.icon}
-                tooltipTitle={action.name}
-                onClick={()=>{this.handleSpeedDial(action.name)}}
-              />
-            ))}
-          </SpeedDial>
+          <div
+              className={classes.speedDial}>
+            <Button 
+              color="info" 
+              round
+              buttonRef={node => { 
+                this.anchorEl = node; 
+              }}
+              aria-owns={open ? 'menu-list-grow' : null}
+              aria-haspopup="true"
+              onClick={this.handleMenuToggle}
+            >
+              <MoreVert /> Action
+            </Button>
+            <Popper open={open} anchorEl={this.anchorEl} transition disablePortal>
+              {({ TransitionProps, placement }) => (
+                <Grow
+                  {...TransitionProps}
+                  id="menu-list-grow"
+                  style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                >
+                  <Paper>
+                    <ClickAwayListener onClickAway={this.handleMenuClose}>
+                      <MenuList>
+                        <MenuItem onClick={() => this.handleSpeedDial('Add')}>Add</MenuItem>
+                        <MenuItem onClick={() => this.handleSpeedDial('Edit')}>Edit</MenuItem>
+                        <MenuItem onClick={() => this.handleSpeedDial('Delete')}>Delete</MenuItem>
+                        <MenuItem onClick={() => this.handleSpeedDial('Print')}>Print</MenuItem>
+                      </MenuList>
+                    </ClickAwayListener>
+                  </Paper>
+                </Grow>
+              )}
+            </Popper>
+          </div>
         </GridItem>
         {this.state.alert}
       </GridContainer>
